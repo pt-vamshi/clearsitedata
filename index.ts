@@ -1,13 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http";
-import cors from 'cors';
 const clearSiteData = require("clearsitedata");
 
-
-//if you want anyone to be able to connect
-app.use(cors({ origin: true }))
-
-//if you want only your frontend running at port 5000 to connect to this backend
-app.use(cors({ origin: "<http://localhost:5000>" }))
 
 interface ClearSiteDataOptions {
   directives?: string[];
@@ -86,6 +79,8 @@ app.post(
   })
 );
 
-server.listen(5000, "localhost", () => {
-    console.log("Listening for request");
-  });
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
+});
