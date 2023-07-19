@@ -1,5 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
+import express, { Application } from "express";
 const clearSiteData = require("clearsitedata");
+const app: Application = express();
+
 
 
 interface ClearSiteDataOptions {
