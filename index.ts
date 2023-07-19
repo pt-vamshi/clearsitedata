@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from "http";
 import cors from 'cors';
+const clearSiteData = require("clearsitedata");
 
-...
 
 //if you want anyone to be able to connect
 app.use(cors({ origin: true }))
@@ -63,3 +63,29 @@ export = function clearSiteData(options: Readonly<ClearSiteDataOptions> = {}) {
     next();
   };
 };
+
+
+
+
+// Clear everything
+app.post(
+  "/logout",
+  clearSiteData({
+    directives: ["*"],
+  })
+);
+
+// Clearing everything is the default
+app.post("/logout", clearSiteData());
+
+// Only clear cookies and storage
+app.post(
+  "/logout",
+  clearSiteData({
+    directives: ["cookies", "storage"],
+  })
+);
+
+server.listen(5000, "localhost", () => {
+    console.log("Listening for request");
+  });
